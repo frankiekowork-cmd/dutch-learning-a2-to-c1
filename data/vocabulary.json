@@ -1,0 +1,72 @@
+[
+  {
+    "nl": "de afspraak",
+    "en": "appointment",
+    "zh": "預約／約定",
+    "introduced_day": 32,
+    "mastery": "unverified"
+  },
+  {
+    "nl": "de winkel",
+    "en": "shop",
+    "zh": "商店",
+    "introduced_day": 32,
+    "mastery": "unverified"
+  },
+  {
+    "nl": "het pakket",
+    "en": "parcel",
+    "zh": "包裹",
+    "introduced_day": 32,
+    "mastery": "unverified"
+  },
+  {
+    "nl": "de fiets",
+    "en": "bicycle",
+    "zh": "自行車",
+    "introduced_day": 32,
+    "mastery": "unverified"
+  },
+  {
+    "nl": "het formulier",
+    "en": "form",
+    "zh": "表格",
+    "introduced_day": 32,
+    "mastery": "unverified"
+  },
+  {
+    "nl": "de vraag",
+    "en": "question",
+    "zh": "問題／提問",
+    "introduced_day": 32,
+    "mastery": "unverified"
+  },
+  {
+    "nl": "de reden",
+    "en": "reason",
+    "zh": "原因",
+    "introduced_day": 32,
+    "mastery": "unverified"
+  },
+  {
+    "nl": "de route",
+    "en": "route",
+    "zh": "路線",
+    "introduced_day": 32,
+    "mastery": "unverified"
+  },
+  {
+    "nl": "controleren",
+    "en": "check / verify",
+    "zh": "檢查／核對",
+    "introduced_day": 32,
+    "mastery": "unverified"
+  },
+  {
+    "nl": "vergeten",
+    "en": "forget",
+    "zh": "忘記",
+    "introduced_day": 32,
+    "mastery": "unverified"
+  }
+]

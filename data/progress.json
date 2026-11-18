@@ -1,0 +1,26 @@
+{
+  "current_completed_day": 32,
+  "next_day": 33,
+  "evidence": "visible conversation only",
+  "days": {
+    "31": {
+      "status": "main_practice_completed",
+      "complete_submissions": 10,
+      "total_prompts": 12,
+      "note": "Question 11 truncated; question 12 unanswered; possible input loss."
+    },
+    "32": {
+      "status": "completed",
+      "submitted": 12,
+      "total": 12,
+      "assessment": "8/12 broadly grammatical; approximate teaching estimate 83%, not a standardized score",
+      "correction": "Question 9 tested stellen/stelt before it was taught; do not deduct as a previously taught verb form."
+    }
+  },
+  "vocabulary": {
+    "verified_unique_cumulative": null,
+    "day32_introduced": 10,
+    "day32_mastered": null
+  },
+  "last_visible_date": "2026-11-18"
+}
