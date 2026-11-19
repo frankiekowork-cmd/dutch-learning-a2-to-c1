@@ -46,7 +46,7 @@ test.beforeEach(async ({ page }) => {
     headers: {'Access-Control-Allow-Origin':'*'},
     body: MOCK_SUPABASE
   }));
-  await page.goto('/');
+  await page.goto('/index.html');
 });
 
 test('guest cannot upload data and forms are accessible', async ({ page }) => {
