@@ -16,6 +16,8 @@ jobs:
           node --check web/app.js
           node --check web/auth.js
           node --check web/content.js
+          node --check web/lesson-catalog.js
+          node --check web/curriculum.js
       - name: Verify referenced HTML IDs exist
         run: |
           node --input-type=module <<'JS'
