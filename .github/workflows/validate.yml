@@ -33,3 +33,17 @@ jobs:
           if(errors.length){console.error(errors.join('\n'));process.exit(1);}
           console.log('Frontend IDs verified');
           JS
+
+  browser-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser test tools
+        run: |
+          npm install --no-save --ignore-scripts @playwright/test@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Browser tests (mocked auth, never real credentials)
+        run: npx playwright test --config=tests/playwright.config.mjs
