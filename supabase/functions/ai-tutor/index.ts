@@ -6,7 +6,7 @@ import { DEMO_EXERCISES } from "./lesson.ts";
 const API_KEY = Deno.env.get("OPENAI_API_KEY") ?? "";
 const MODEL = Deno.env.get("OPENAI_MODEL") ?? "gpt-4.1-mini";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
-const SUPABASE_PUBLISHABLE_KEY = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
+const SUPABASE_PUBLISHABLE_KEY = Deno.env.get("SUPABASE_ANON_KEY") ?? "";\nconst SUPABASE_SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 const ALLOWED_ORIGIN = Deno.env.get("ALLOWED_ORIGIN") ?? "";
 const TYPES = ["grammar", "word_order", "vocabulary", "spelling", "style", "other"];
 
@@ -51,7 +51,7 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { status: origin === ALLOWED_ORIGIN ? 204 : 403, headers });
   if (req.method !== "POST") return send({ error: "method_not_allowed" }, 405, headers);
   if (!ALLOWED_ORIGIN || origin !== ALLOWED_ORIGIN) return send({ error: "origin_not_allowed" }, 403, headers);
-  if (!API_KEY || !SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) return send({ error: "server_not_configured" }, 503, headers);
+  if (!API_KEY || !SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY || !SUPABASE_SERVICE_KEY) return send({ error: "server_not_configured" }, 503, headers);
   const jwt = req.headers.get("Authorization")?.match(/^Bearer (.+)$/i)?.[1];
   if (!jwt) return send({ error: "sign_in_required" }, 401, headers);
   const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
@@ -83,7 +83,7 @@ Deno.serve(async (req) => {
     context = JSON.stringify({ question: userInput });
   }
   // The atomic database quota counts every attempted AI request, including upstream errors.
-  const { data: allowed, error: quotaError } = await supabase.rpc("claim_ai_daily_quota");
+  // Only the server may spend quota. The caller identity comes from Supabase Auth,\n  // never the untrusted JSON request. The RPC is security-invoker and service-role-only.\n  const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });\n  const { data: allowed, error: quotaError } = await admin.rpc("consume_ai_quota", { p_user_id: authData.user.id });
   if (quotaError) return send({ error: "quota_unavailable" }, 503, headers);
   if (!allowed) return send({ error: "daily_limit_reached", daily_limit: 20 }, 429, headers);
   const instruction = mode === "grade"
