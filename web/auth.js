@@ -25,6 +25,20 @@ async function refreshUser(){
 }
 window.dutchCloud={
   get user(){return currentUser;},
+  async tutor(payload){
+    if(!currentUser)throw new Error("請先登入先可以使用 AI 老師");
+    const owner=currentUser.id;
+    const {data:{session},error:sessionError}=await sb.auth.getSession();
+    if(sessionError||!session?.access_token||session.user?.id!==owner)throw new Error("登入已過期，請重新登入");
+    const {data,error}=await sb.functions.invoke("ai-tutor",{
+      body:payload,
+      headers:{Authorization:"Bearer "+session.access_token}
+    });
+    if(!currentUser||currentUser.id!==owner)throw new Error("登入身份已切換，請重新操作");
+    if(error)throw new Error("AI 服務未可用；請確認後端已安全部署及設定 API 費用上限");
+    if(!data||data.mode!==payload.mode||!data.feedback)throw new Error("AI 回應格式無效");
+    return data.feedback;
+  },
   async loadCurriculum(){
     if(!currentUser)throw new Error("請先登入");
     const owner=currentUser.id;
