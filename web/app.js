@@ -24,3 +24,53 @@ el("export").addEventListener("click",()=>{const output={schema_version:2,export
 el("clear").addEventListener("click",()=>{if(!confirm("確定清除呢個瀏覽器入面全部示範練習答案？建議先匯出。"))return;answers={};document.querySelectorAll("#questions-list textarea").forEach(t=>t.value="");store(scopedKey("answers"),answers);el("save-status").textContent="本機答案已清除。";refresh();});
 el("question-draft").value=load(scopedKey("question-draft"),"");el("question-draft").addEventListener("input",e=>{el("question-status").textContent=store(scopedKey("question-draft"),e.target.value)?"草稿已儲存在本機。":"無法儲存草稿。";});
 refresh();
+
+el("cloud-save").addEventListener("click", async event => {
+  if (!window.dutchCloud?.user) {
+    el("save-status").textContent = "請先用電郵登入，先可以同步答案。";
+    return;
+  }
+  const button = event.currentTarget;
+  button.disabled = true;
+  el("save-status").textContent = "正在同步答案…";
+  try {
+    const count = await window.dutchCloud.saveAnswers(answers);
+    el("save-status").textContent = "已成功將 " + count + " 題儲存到你嘅帳戶。";
+  } catch (err) {
+    el("save-status").textContent = "雲端同步失敗：" + (err.message || "未知錯誤");
+  } finally { button.disabled = false; }
+});
+
+document.addEventListener("dutch-auth-state", event => {
+  const { user, profile, answers: cloudAnswers, loadError } = event.detail;
+  accountId = user?.id || null;
+  prefs = { ...defaults, ...load(scopedKey("preferences"), {}) };
+  answers = load(scopedKey("answers"), {});
+  if (!answers || Array.isArray(answers) || typeof answers !== "object") answers = {};
+  if (user && !loadError) {
+    if (profile) {
+      prefs = {
+        ...prefs,
+        level: profile.level,
+        minutes: String(profile.daily_minutes),
+        goal: profile.goal,
+        language: profile.explanation_language
+      };
+    }
+    answers = { ...answers, ...cloudAnswers };
+    store(scopedKey("answers"), answers);
+    store(scopedKey("preferences"), prefs);
+  }
+  for (const [field, value] of Object.entries(prefs)) {
+    if (form.elements.namedItem(field)) form.elements.namedItem(field).value = value;
+  }
+  course.questions.forEach((q, i) => {
+    const input = document.querySelectorAll("#questions-list textarea")[i];
+    if (input) input.value = answers[q.id] || "";
+  });
+  el("question-draft").value = load(scopedKey("question-draft"), "");
+  el("save-status").textContent = user
+    ? "已切換至你嘅帳戶；雲端同步需要按「儲存答案到雲端」。"
+    : "訪客模式：答案只儲存在呢個瀏覽器。";
+  refresh();
+});
