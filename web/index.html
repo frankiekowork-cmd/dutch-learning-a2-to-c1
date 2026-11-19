@@ -12,6 +12,12 @@
 <section id="practice" class="pane"><h2>自主造句 · 示例教材</h2><p>以下題目來自既有 Day 32 課程。你可以答完再比較參考句子，但<strong>目前未接入 AI 自動批改</strong>，唔會將不同但可能正確嘅答案誤判為錯。</p><label class="toggle"><input type="checkbox" id="hints"> 顯示詞語提示</label><div id="questions-list"></div><div class="actions"><button id="export" class="primary">匯出我的答案</button><button id="cloud-save" type="button">儲存答案到雲端（需登入）</button><button id="clear">清除本機答案</button></div><p id="save-status" role="status" aria-live="polite"></p></section>
 <section id="curriculum" class="pane"><h2>A2–C1 分級課程</h2><p>以下係全新編寫嘅試行課節，按程度分類，並非過去 Day 1–30 記錄，亦唔代表完整 CEFR 課程。你可以自由選擇課節，唔需要跟 Day 32 次序。</p>
 <div class="lesson-controls"><label for="catalog-level">課程程度</label><select id="catalog-level"><option value="all">所有程度</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select></div>
+<div id="sync-panel" class="notice">
+<strong>雲端課程同步（需登入）</strong>
+<p>新課程草稿、完成標記及測驗重溫紀錄可以手動上傳或下載。下載會以雲端版本取代目前帳戶嘅本機課程資料；操作前會再確認。</p>
+<div class="actions"><button id="upload-curriculum" type="button">上傳本機課程進度</button><button id="download-curriculum" type="button">下載雲端課程進度</button></div>
+<p id="sync-status" role="status" aria-live="polite">未同步。</p>
+</div>
 <div id="lesson-cards" class="lesson-cards"></div>
 <section id="active-lesson" hidden aria-label="目前選擇課節"><h3 id="lesson-title"></h3><p id="lesson-grammar"></p><div id="lesson-words"></div><div id="lesson-examples"></div><div id="lesson-exercises"></div><button id="mark-studied" type="button" class="primary">我已完成閱讀及練習（本機標記）</button><p id="lesson-status" role="status"></p></section>
 </section>
@@ -33,4 +39,4 @@
 <label>解釋語言<select name="language"><option value="zh-en">荷蘭文／英文／繁體中文</option><option value="en">荷蘭文／英文</option><option value="nl">荷蘭文</option></select></label>
 <button class="primary" type="submit">儲存我的設定</button><p id="settings-status" role="status" aria-live="polite"></p></form></section>
 </main><footer class="shell">Prototype · Supabase email sign-in and cloud save · AI grading not enabled · <a href="https://github.com/frankiekowork-cmd/dutch-learning-a2-to-c1">Source</a></footer>
-<script src="content.js"></script><script src="lesson-catalog.js"></script><script src="review-questions.js"></script><script src="learning-engine.js"></script><script src="app.js"></script><script src="curriculum.js"></script><script src="review.js"></script><script type="module" src="auth.js"></script></body></html>
+<script src="content.js"></script><script src="lesson-catalog.js"></script><script src="review-questions.js"></script><script src="learning-engine.js"></script><script src="app.js"></script><script src="curriculum.js"></script><script src="review.js"></script><script src="cloud-sync.js"></script><script type="module" src="auth.js"></script></body></html>
