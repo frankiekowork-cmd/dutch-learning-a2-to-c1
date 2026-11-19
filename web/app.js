@@ -8,8 +8,8 @@ const el=id=>document.getElementById(id);
 function load(key,fallback){try{const raw=JSON.parse(localStorage.getItem(PREFIX+key));return raw??fallback;}catch{return fallback;}}
 function store(key,value){try{localStorage.setItem(PREFIX+key,JSON.stringify(value));return true;}catch{return false;}}
 const safe=(value)=>String(value??"");
-let prefs={...defaults,...load(scopedKey("preferences"),{})};
-let answers=load(scopedKey("answers"),{});if(!answers||Array.isArray(answers)||typeof answers!=="object")answers={};
+let prefs={...defaults,...load(scopedKey("preferences"),load("preferences",{}))};
+let answers=load(scopedKey("answers"),load("answers",{}));if(!answers||Array.isArray(answers)||typeof answers!=="object")answers={};
 function tab(name){document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));document.querySelectorAll(".pane").forEach(s=>s.classList.toggle("active",s.id===name));}
 document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>tab(b.dataset.tab)));
 const form=el("preferences");for(const [key,value] of Object.entries(prefs)){if(form.elements.namedItem(key))form.elements.namedItem(key).value=value;}
