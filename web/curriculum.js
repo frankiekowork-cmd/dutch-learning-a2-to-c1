@@ -109,5 +109,9 @@
     if (selected) showLesson(selected.id);
     drawList();
   });
+  document.addEventListener("dutch-curriculum-restored", () => {
+    if(active)showLesson(active.id);
+    drawList();
+  });
   drawList();
 })();
