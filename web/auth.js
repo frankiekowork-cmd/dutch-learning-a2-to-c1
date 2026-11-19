@@ -25,6 +25,30 @@ async function refreshUser(){
 }
 window.dutchCloud={
   get user(){return currentUser;},
+  async loadCurriculum(){
+    if(!currentUser)throw new Error("請先登入");
+    const owner=currentUser.id;
+    const {data,error}=await sb.from("learner_curriculum_state")
+      .select("drafts,studied,reviews,updated_at").eq("user_id",owner).maybeSingle();
+    if(error)throw error;
+    if(!currentUser || currentUser.id!==owner)throw new Error("登入帳戶已更改；請重新操作");
+    return data;
+  },
+  async saveCurriculum(snapshot){
+    if(!currentUser)throw new Error("請先登入");
+    const owner=currentUser.id;
+    if(!snapshot || ["drafts","studied","reviews"].some(k =>
+      !snapshot[k] || Array.isArray(snapshot[k]) || typeof snapshot[k]!=="object"
+    ))throw new Error("學習資料格式無效");
+    const payload=JSON.stringify(snapshot);
+    if(payload.length>45000)throw new Error("學習資料過大，暫時無法上傳");
+    const {error}=await sb.from("learner_curriculum_state").upsert({
+      user_id:owner,drafts:snapshot.drafts,studied:snapshot.studied,
+      reviews:snapshot.reviews,updated_at:new Date().toISOString()
+    },{onConflict:"user_id"});
+    if(error)throw error;
+    if(!currentUser || currentUser.id!==owner)throw new Error("儲存期間登入帳戶已更改；請重新登入核對");
+  },
   async saveSettings(p){
     if(!currentUser)throw new Error("請先登入");
     const {error}=await sb.from("learner_profiles").upsert({
