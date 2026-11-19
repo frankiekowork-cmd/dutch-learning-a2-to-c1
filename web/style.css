@@ -6,3 +6,5 @@
 .signin input{min-width:240px;max-width:360px;width:100%;padding:10px;border:1px solid #b4c7d6;border-radius:8px;font:inherit}
 .account-area .muted{font-size:.89rem}
 [hidden]{display:none!important}
+
+.lesson-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0}.lesson-controls select{font:inherit;padding:8px 12px;border:1px solid #b4c7d6;border-radius:8px}.lesson-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.lesson-card{border:1px solid #d5e3ed;border-radius:12px;padding:16px;background:#f7fafc}.lesson-card p{margin:6px 0 12px}.lesson-card button{width:100%}#active-lesson{border-top:2px solid #dce8ef;margin-top:22px;padding-top:12px}#lesson-words,#lesson-examples{border-bottom:1px solid #dce8ef;padding-bottom:8px}#lesson-words p,#lesson-examples p{margin:8px 0}#lesson-exercises textarea{width:100%;min-height:82px;padding:11px;font:inherit;border:1px solid #b4c7d6;border-radius:9px}#lesson-exercises .question button{margin:8px 0}
