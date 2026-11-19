@@ -129,5 +129,6 @@
   });
   $("preferences").addEventListener("submit", () => { queueMicrotask(() => { render(); }); });
   document.addEventListener("dutch-lesson-studied", summary);
+  document.addEventListener("dutch-curriculum-restored", render);
   render();
 })();
