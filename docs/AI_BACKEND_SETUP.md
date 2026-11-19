@@ -1,6 +1,6 @@
 # AI tutor backend — deployment and security
 
-This code is a **scaffold** and is **not deployed or enabled**. Public GitHub Pages cannot securely store OpenAI API keys. This project uses Supabase Auth + an Edge Function as the authenticated server proxy.
+This code is a **scaffold** and is **not deployed or enabled**. The database migration `202611190003_disable_quota_rpc.sql` revokes access to `public.claim_ai_daily_quota`; **the scaffold cannot currently call it**. Before AI deployment, redesign quota consumption behind a private server-controlled authorization boundary (not an exposed authenticated RPC), add tests, and run security advisors again. Public GitHub Pages cannot securely store OpenAI API keys. This project uses Supabase Auth + an Edge Function as the authenticated server proxy.
 
 ## Preparation
 1. Create your own Supabase project; enable email or OAuth sign-in and configure allowed redirects.
@@ -31,3 +31,8 @@ Returns `{"mode":"grade"|"ask","feedback":{...}}` with validated JSON response s
 - https://developers.openai.com/api/docs/guides/structured-outputs
 - https://supabase.com/docs/guides/functions/auth
 - https://supabase.com/docs/reference/javascript/auth-getuser
+
+## Current security gate (2026-11-19)
+- Direct `authenticated` and `anon` EXECUTE rights on the privileged quota function were revoked in the linked Supabase project.
+- Authenticated AI request processing therefore intentionally remains disabled until the quota endpoint is redesigned and tested.
+- No OpenAI key is configured or deployed in this project through this repository.
