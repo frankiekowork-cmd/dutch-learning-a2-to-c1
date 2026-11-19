@@ -21,6 +21,7 @@ jobs:
           node --check web/review-questions.js
           node --check web/learning-engine.js
           node --check web/review.js
+          node --check web/cloud-sync.js
       - name: Verify referenced HTML IDs exist
         run: |
           node --input-type=module <<'JS'
