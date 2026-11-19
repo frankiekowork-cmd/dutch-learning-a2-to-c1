@@ -59,7 +59,6 @@ window.COURSE = {
       "zh": "我正在找的商店就在附近。",
       "bank": "zoeken · dichtbij · winkel",
       "sample_nl": "De winkel die ik zoek, is dichtbij.",
-      "submitted_nl": "de winkel die ik zoek is dichtbij.",
       "pre_taught": null
     },
     {
@@ -68,7 +67,6 @@ window.COURSE = {
       "zh": "那個包裹是給我同事的。",
       "bank": "pakket · collega",
       "sample_nl": "Dat pakket is voor mijn collega.",
-      "submitted_nl": "het pakke is voor mijn collega",
       "pre_taught": null
     },
     {
@@ -77,7 +75,6 @@ window.COURSE = {
       "zh": "你需要的表格在桌上。",
       "bank": "nodig hebben · formulier",
       "sample_nl": "Het formulier dat je nodig hebt, ligt op de tafel.",
-      "submitted_nl": "Het formulier dat je nodig hebt ligt op de tafel.",
       "pre_taught": null
     },
     {
@@ -86,7 +83,6 @@ window.COURSE = {
       "zh": "我知道你的自行車在哪裡。",
       "bank": "weten · fiets",
       "sample_nl": "Ik weet waar je fiets staat.",
-      "submitted_nl": "ik weet waar je fiets staan",
       "pre_taught": null
     },
     {
@@ -95,7 +91,6 @@ window.COURSE = {
       "zh": "明天我會核對表格。",
       "bank": "morgen · controleren",
       "sample_nl": "Morgen zal ik het formulier controleren.",
-      "submitted_nl": "morgen zal ik het formulier controleren",
       "pre_taught": null
     },
     {
@@ -104,7 +99,6 @@ window.COURSE = {
       "zh": "她有時會忘記預約。",
       "bank": "soms · vergeten",
       "sample_nl": "Zij vergeet soms haar afspraak.",
-      "submitted_nl": "zij vergeet haar afspraks soms.",
       "pre_taught": null
     },
     {
@@ -113,7 +107,6 @@ window.COURSE = {
       "zh": "核對表格的同事通常會提早到達。",
       "bank": "collega · meestal · controleren",
       "sample_nl": "De collega die het formulier controleert, komt meestal vroeg.",
-      "submitted_nl": "de collega die het formulier controleren komt meestal vroeg.",
       "pre_taught": null
     },
     {
@@ -122,7 +115,6 @@ window.COURSE = {
       "zh": "因為我找不到自行車，所以必須步行。",
       "bank": "fiets · lopen · omdat",
       "sample_nl": "Omdat ik mijn fiets niet kan vinden, moet ik lopen.",
-      "submitted_nl": "omdart ik mijn fiets kan niet vinden, moet ik lopen.",
       "pre_taught": null
     },
     {
@@ -131,7 +123,6 @@ window.COURSE = {
       "zh": "你提出的問題很重要。",
       "bank": "belangrijk · vraag · stellen",
       "sample_nl": "De vraag die je stelt, is belangrijk.",
-      "submitted_nl": "de vraag die je steel is belangrijk.",
       "pre_taught": false
     },
     {
@@ -140,7 +131,6 @@ window.COURSE = {
       "zh": "我通常提早到達，但今天遲到了。",
       "bank": "vroeg · meestal · laat",
       "sample_nl": "Ik kom meestal vroeg, maar vandaag ben ik laat.",
-      "submitted_nl": "ik kom meestal vroeg, maar vandaag bin ik laat.",
       "pre_taught": null
     },
     {
@@ -149,7 +139,6 @@ window.COURSE = {
       "zh": "我需要的東西在入口旁邊。",
       "bank": "ingang · nodig hebben · naast",
       "sample_nl": "Wat ik nodig heb, ligt naast de ingang.",
-      "submitted_nl": "wat ik nodig heb is naast de ingang.",
       "pre_taught": null
     },
     {
@@ -158,13 +147,8 @@ window.COURSE = {
       "zh": "我知道你想去哪裡。",
       "bank": "willen · weten · naartoe",
       "sample_nl": "Ik weet waar je naartoe wilt.",
-      "submitted_nl": "ik weet waar je naartoe wilt",
       "pre_taught": null
     }
   ],
-  "progress": {
-    "day31": "主要練習完成：10/12完整提交",
-    "day32": "12/12 已提交；第9題涉及未先教的 stellen/stelt",
-    "next": "Day 33 尚未建立：不可虛構課程"
-  }
+  "progress": {"status": "示範教材，個人歷史已從公開前端移除"}
 };
