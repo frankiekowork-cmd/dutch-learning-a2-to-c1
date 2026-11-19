@@ -83,6 +83,15 @@
     });
     $("lesson-status").textContent = read("studied", {})[id] ? "你之前已自行標記呢課完成。" : "未標記為已讀；唔會自動計作完成。";
   }
+  window.dutchOpenLesson = id => {
+    const lesson = lessons.find(x => x.id === id);
+    if (!lesson) return;
+    document.querySelector('nav button[data-tab="curriculum"]').click();
+    $("catalog-level").value = lesson.level;
+    drawList();
+    showLesson(id);
+    $("active-lesson").scrollIntoView({block:"nearest",behavior:"auto"});
+  };
   $("catalog-level").addEventListener("change", drawList);
   $("mark-studied").addEventListener("click", () => {
     if (!active) return;
@@ -91,6 +100,7 @@
     if (write("studied", studied)) {
       $("lesson-status").textContent = "已自行確認完成；此標記只儲存於本機，不代表通過測驗。";
       drawList();
+      document.dispatchEvent(new Event("dutch-lesson-studied"));
     } else $("lesson-status").textContent = "無法儲存本機進度。";
   });
   document.addEventListener("dutch-auth-state", event => {
