@@ -47,3 +47,31 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Browser tests (mocked auth, never real credentials)
         run: npx playwright test --config=tests/playwright.config.mjs
+
+  preview-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check preview has no server secrets
+        run: |
+          if grep -rE 'sb_secret_|service_role_key|sk-proj-|OPENAI_API_KEY[[:space:]]*=' web/; then
+            echo 'Potential secret found in web'; exit 1
+          fi
+      - name: Package standalone test site
+        run: |
+          mkdir -p preview-dist
+          cp -R web/. preview-dist/
+          cat > preview-dist/README_TESTING.txt <<'TXT'
+          Independent local preview of the development branch.
+          1. Extract all files.
+          2. Run: python3 -m http.server 8765 --directory .
+          3. Open: http://localhost:8765/
+          4. Add http://localhost:8765/ as an EXACT redirect URL in Supabase Auth settings BEFORE requesting a magic link.
+          5. Test guest mode, email login and explicit cloud save with test accounts only.
+          DO NOT publish real personal data. OPENAI AI grading is NOT enabled.
+          TXT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dutch-learning-local-preview
+          path: preview-dist/
+          retention-days: 7
