@@ -1,0 +1,35 @@
+name: Validate Dutch learning frontend
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feature/personalized-learning-foundation]
+permissions:
+  contents: read
+jobs:
+  frontend-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          node --check web/app.js
+          node --check web/auth.js
+          node --check web/content.js
+      - name: Verify referenced HTML IDs exist
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const html=fs.readFileSync('web/index.html','utf8');
+          const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
+          const errors=[];
+          for(const id of ids) if(ids.indexOf(id)!==ids.lastIndexOf(id)) errors.push('Duplicate id '+id);
+          for(const file of ['web/app.js','web/auth.js']){
+            const source=fs.readFileSync(file,'utf8');
+            for(const match of source.matchAll(/\b(?:el|\$)\("([^"]+)"\)/g)){
+              if(!ids.includes(match[1]))errors.push(file+' references missing #'+match[1]);
+            }
+          }
+          if(errors.length){console.error(errors.join('\n'));process.exit(1);}
+          console.log('Frontend IDs verified');
+          JS
